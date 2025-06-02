@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: biometria-config
+data:
+  appsettings.json: |
+    {
+      "Jwt": {
+        "Key": "super-secure-key",
+        "Issuer": "BiometriaAPI",
+        "Audience": "BiometriaClients"
+      },
+      "Logging": {
+        "LogLevel": {
+          "Default": "Information"
+        }
+      }
+    }

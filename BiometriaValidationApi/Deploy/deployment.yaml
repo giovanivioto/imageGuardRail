@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: biometria-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: biometria-api
+  template:
+    metadata:
+      labels:
+        app: biometria-api
+    spec:
+      containers:
+        - name: biometria-api
+          image: yourregistry/biometria-api:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: "Production"
+          volumeMounts:
+            - name: appsettings
+              mountPath: /BiometriaValidationApi/appsettings.json
+              subPath: appsettings.json
+      volumes:
+        - name: appsettings
+          configMap:
+            name: biometria-config
